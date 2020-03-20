@@ -9,7 +9,7 @@ const SmurfForm = props => {
 
     const [newSmurf, setNewSmurf] = useState({
         name: '',
-        age: '',
+        age: ``,
         height: ''
     })
 
@@ -58,8 +58,8 @@ const SmurfForm = props => {
                     Age:
                 <input
                         id='age'
-                        type="number"
                         name="age"
+                        type='text'
                         value={newSmurf.age}
                         onChange={handleChanges}
                         placeholder="age"

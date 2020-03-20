@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
+import {connect} from 'react-redux'
 
-import { createStore, applyMiddleware } from 'redux'
-import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-
-import { reducer } from '../reducers/reducer'
 import Villiage from './Villiage'
 import Header from './Header'
 import SmurfForm from "./SmurfForm";
+import { fetchSmurfs } from "../actions/actions";
 
 
-const store = createStore(reducer, applyMiddleware(thunk))
+
+
+
 
 
 const App = props => {
+
+  useEffect(() => {
+    props.fetchSmurfs();
+  }, [])
+
   return (
-    <Provider store={store}>
+ 
     <div className="App">
       <Header />
       <SmurfForm />
@@ -25,12 +29,21 @@ const App = props => {
         <Villiage />
       </div>
     </div>
-  </Provider>
+
   );
 }
 
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    smurfs:state.smurfs
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchSmurfs }
+)(App);
 
 
 
@@ -40,5 +53,7 @@ When I load the app, I need to get it to load the initial state
 THEN grab the data from the server and set that to state. 
 (JUST NEED TO CONNECT EVERYTHING HERE)
 I need to add a form that adds a smurf to the smurfs state.
+
+FORM WORKS
 
 */

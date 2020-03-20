@@ -1,26 +1,7 @@
 import { FETCH_SMURFS, UPDATE_SMURFS, SET_ERROR, ADD_SMURF } from '../actions/actions'
 
 export const initialState = {
-    smurfs: [
-        {
-            name: "Brainey",
-            age: 200,
-            height: "5cm",
-            id: 99
-        },
-        {
-            name: "Brainey",
-            age: 200,
-            height: "5cm",
-            id: 99
-        },
-        {
-            name: "Brainey",
-            age: 200,
-            height: "5cm",
-            id: 99
-        }
-    ],
+    smurfs: [],
     isFetchingData: false,
     error: ''
 };
@@ -30,8 +11,7 @@ export const reducer = (state = initialState, action) => {
         case FETCH_SMURFS:
             return {
                 ...state,
-                isFetchingData: true,
-                smurfs: [...state.smurfs, action.payload]
+                isFetchingData: true
             }
         case UPDATE_SMURFS:
             return {
@@ -46,14 +26,14 @@ export const reducer = (state = initialState, action) => {
                 error: action.payload
             }
         case ADD_SMURF:
-            console.log('works', action.payload)
+            console.log('works', action.payload, state)
             return {
                 ...state,
-                smurfs: [
-                    ...state.smurfs,
-                    action.payload
-                ]
+                smurfs: [...state.smurfs, action.payload]
             }
+
+            //post to api
+            //fetchSmurfs()
         default:
             return state
     }

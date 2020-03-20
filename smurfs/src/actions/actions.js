@@ -15,7 +15,7 @@ export const fetchSmurfs = () => dispatch => {
         .get(`http://localhost:3333/smurfs`)
         .then(res => {
             console.log(res)
-            dispatch({ type: UPDATE_SMURFS, payload: res})
+            dispatch({ type: UPDATE_SMURFS, payload: res.data})
         })
         .catch(err => {
             console.log(err)
@@ -27,6 +27,14 @@ export const fetchSmurfs = () => dispatch => {
 
 
 
-export const addSmurf = (smurf) => {
-    return { type: ADD_SMURF, payload: smurf }
+export const addSmurf = (smurf) => dispatch => {
+    console.log('post', smurf)
+    dispatch ({ type: ADD_SMURF, payload: smurf })
+    axios({
+        method: 'post',
+        url: 'http://localhost:3333/smurfs',
+        data: smurf
+    })
+    fetchSmurfs()
+    //
 }

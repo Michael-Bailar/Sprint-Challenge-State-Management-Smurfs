@@ -3,11 +3,12 @@ import ASmurf from './ASmurf'
 import { connect } from 'react-redux'
 
 const Villiage = props => {
+    console.log('villiageprops',props.smurfs)
     return (
         <div className='villiage'>
             {props.smurfs.map(smurf => {
                 return(
-                    <ASmurf key={ smurf.id } smurf={ smurf } />
+                    <ASmurf key={smurf.name} smurf={ smurf } />
                 )
             })}
         </div>
@@ -16,9 +17,9 @@ const Villiage = props => {
 
 const mapStateToProps = state => {
     return {
-        ...state
-    }
-}
+      smurfs:state.smurfs
+    };
+  };
 
 export default connect(
     mapStateToProps,
